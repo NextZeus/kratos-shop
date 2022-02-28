@@ -1,5 +1,7 @@
 # Command
 
+# User application
+
 ```shell
 xiaodong@bogon ~/go > mkdir -p github.com/nextzeus/kratos-shop 
 xiaodong@bogon ~/go > cd github.com/nextzeus/kratos-shop 
@@ -7,22 +9,22 @@ xiaodong@bogon ~/g/s/g/n/kratos-shop (main)> go mod init github.com/nextzeus/kra
 xiaodong@bogon ~/g/s/g/n/kratos-shop (main)> mkdir -p api
 xiaodong@bogon ~/g/s/g/n/kratos-shop (main)> mkdir -p app
 xiaodong@bogon ~/g/s/g/n/kratos-shop (main)> cd app/
-xiaodong@bogon ~/g/~/g/s/g/n/k/app (main)> kratos new server # (app/server)
-xiaodong@bogon ~/g/s/g/n/kratos-shop (main)> rm -rf app/server/api #(删除 api 目录)
-xiaodong@bogon ~/g/s/g/n/kratos-shop (main)> rm app/server/internal/service/greeter.go 
-xiaodong@bogon ~/g/s/g/n/kratos-shop (main)> mkdir -p api/server/service/v1
+xiaodong@bogon ~/g/~/g/s/g/n/k/app (main)> kratos new user # (app/user/service)
+xiaodong@bogon ~/g/s/g/n/kratos-shop (main)> rm -rf app/user/api #(删除 api 目录)
+xiaodong@bogon ~/g/s/g/n/kratos-shop (main)> rm app/user/service/internal/service/greeter.go 
+xiaodong@bogon ~/g/s/g/n/kratos-shop (main)> mkdir -p api/user/service/v1
 # 生成 proto 模板
-xiaodong@bogon ~/g/s/g/n/kratos-shop (main)> kratos proto add api/server/service/v1/server.proto
+xiaodong@bogon ~/g/s/g/n/kratos-shop (main)> kratos proto add api/user/service/v1/user.proto
 # 生成 proto 源码
-xiaodong@bogon ~/g/s/g/n/kratos-shop (main)> kratos proto client api/server/service/v1/server.proto
+xiaodong@bogon ~/g/s/g/n/kratos-shop (main)> kratos proto client api/user/service/v1/user.proto
 # 生成 server 模板
-xiaodong@bogon ~/g/s/g/n/kratos-shop (main)> kratos proto server api/server/service/v1/server.proto -t app/server/internal/service/
-app/server/internal/service/server.go
+xiaodong@bogon ~/g/s/g/n/kratos-shop (main)> kratos proto server api/user/service/v1/user.proto -t app/user/service/internal/service/
+app/user/service/internal/service/server.go
 
 
 ```
 
-## 修改 app/user/internal/conf/conf.proto
+## 修改 app/user/service/internal/conf/conf.proto
 ```proto
 
 message Bootstrap {
@@ -49,7 +51,7 @@ message Registry {
 
 ```
 
-## 修改 app/user/configs/config.yaml
+## 修改 app/user/service/configs/config.yaml
 ```yaml
 ...
 trace: # 链路追踪的参数
@@ -57,17 +59,17 @@ trace: # 链路追踪的参数
 auth: # jwt token key
   key: some-secret-key
 ```
-## 修改 app/user/Makefile
+## 修改 app/user/service/Makefile
 - ./third_party 改成 ../../third_party
 - 在 app/user 目录下执行 make config 生成 config.pb.go
 
-## 创建 app/user/data/ent 目录
+## 创建 app/user/service/data/ent 目录
 ```shell
 xiaodong@bogon ~/g/s/g/n/kratos-shop (main)> mkdir -p app/server/internal/data/ent/schema
 
 ```
 
-## 新增 ent/schema/user.go
+## 新增 app/user/service/internal/data/ent/schema/user.go
 ```shell
 xiaodong@bogon ~/g/s/g/n/kratos-shop (main)> touch app/server/internal/data/ent/schema/server.go
 ```
