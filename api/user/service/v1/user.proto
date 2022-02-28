@@ -1,0 +1,172 @@
+syntax = "proto3";
+
+package api.user.service.v1;
+
+option go_package = "github.com/nextzeus/kratos-shop/api/server/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.server.service.v1";
+
+service User {
+	rpc VerifyPassword(VerifyPasswordRequest) returns (VerifyPasswordReply);
+	rpc CreateUser (CreateUserRequest) returns (CreateUserReply);
+	rpc Save(SaveUserRequest) returns (SaveUserReply);
+	rpc GetUser (GetUserRequest) returns (GetUserReply);
+	rpc GetUserByUserName(GetUserByUserNameRequest) returns (GetUserByUserNameReply);
+	rpc ListUser (ListUserRequest) returns (ListUserReply);
+	rpc CreateAddress(CreateAddressRequest) returns (CreateAddressReply);
+	rpc GetAddress(GetAddressRequest) returns (GetAddressReply);
+	rpc ListAddresses(ListAddressesRequest) returns (ListAddressesReply);
+	rpc CreateCard(CreateCardRequest) returns (CreateCardReply);
+	rpc GetCard(GetCardRequest) returns (GetCardReply);
+	rpc ListCard(ListCardRequest) returns (ListCardReply);
+	rpc DeleteCard(DeleteCardRequest) returns (DeleteCardReply);
+}
+
+message CreateCardRequest {
+	int64 uid = 1;
+	string card_no = 2;
+	string ccv = 3;
+	string expires = 4;
+}
+
+message CreateCardReply {
+	int64 id = 1;
+}
+
+message GetCardRequest {
+	int64 id = 1;
+}
+
+message GetCardReply {
+	int64 id = 1;
+	string card_no = 2;
+	string ccv = 3;
+	string expires = 4;
+}
+
+message ListCardRequest {
+	int64 uid = 1;
+}
+
+message ListCardReply {
+	message Card {
+		int64 id = 1;
+		string card_no = 2;
+		string ccv = 3;
+		string expires = 4;
+	}
+	repeated Card results = 1;
+}
+
+message DeleteCardRequest {
+	int64 uid = 1;
+}
+
+message DeleteCardReply {
+	bool ok = 1;
+}
+
+message VerifyPasswordRequest {
+	string username = 1;
+	string password = 2;
+}
+
+message VerifyPasswordReply {
+	bool ok = 1;
+	int64 id = 2;
+}
+
+message CreateAddressRequest {
+	int64 uid = 1;
+	string name = 2;
+	string mobile = 3;
+	string address = 4;
+	string post_code = 5;
+}
+
+message CreateAddressReply {
+	int64 id = 1;
+	string name = 2;
+	string mobile = 3;
+	string address = 4;
+	string post_code = 5;
+}
+
+message GetAddressRequest {
+	int64 id = 1;
+}
+
+message GetAddressReply {
+	int64 id = 1;
+	string name = 2;
+	string mobile = 3;
+	string address = 4;
+	string post_code = 5;
+}
+
+message ListAddressesRequest {
+	int64 uid = 1;
+}
+
+message ListAddressesReply {
+	message Address {
+		int64 id = 1;
+		string name = 2;
+		string mobile = 3;
+		string address = 4;
+		string post_code = 5;
+	}
+	repeated Address results = 1;
+}
+
+message SaveUserRequest {
+	int64 id = 1;
+	string name = 2;
+	string password = 3;
+}
+
+message SaveUserReply {
+	int64 id = 1;
+}
+message CreateUserRequest {
+	string username = 1;
+	string password = 2;
+}
+message CreateUserReply {
+	int64 id = 1;
+	string username = 2;
+}
+
+message UpdateUserRequest {}
+message UpdateUserReply {}
+
+message DeleteUserRequest {}
+message DeleteUserReply {}
+
+message GetUserRequest {
+	int64 id = 1;
+}
+message GetUserReply {
+	int64 id = 1;
+	string username = 2;
+}
+
+message GetUserByUserNameRequest {
+	string username = 1;
+}
+
+message GetUserByUserNameReply {
+	int64 id = 1;
+	string username = 2;
+}
+
+message ListUserRequest {
+	int64 id = 1;
+}
+message ListUserReply {
+	message User {
+		int64 id = 1;
+		string username = 2;
+	}
+	repeated User results = 1;
+}
