@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package api.user.service.v1;
 
-option go_package = "github.com/nextzeus/kratos-shop/api/server/service/v1;v1";
+option go_package = "github.com/nextzeus/kratos-shop/api/server/server/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.server.service.v1";
 

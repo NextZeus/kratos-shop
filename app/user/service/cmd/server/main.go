@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"github.com/go-kratos/kratos/v2/registry"
 	"go.opentelemetry.io/otel/exporters/jaeger"
 	"go.opentelemetry.io/otel/sdk/resource"
@@ -22,14 +21,16 @@ import (
 // go build -ldflags "-X main.Version=0.0.1 -X main.Name=kratos-shop"
 var (
 	// Name is the name of the compiled software.
-	Name string
+	Name string = "kratos-shop.user.service"
 	// Version is the version of the compiled software.
-	Version string
+	Version string = "0.0.1"
 	// flagconf is the config flag.
 	flagconf string
 
 	id, _ = os.Hostname()
 )
+
+var Id = id + "#user-service"
 
 func init() {
 	flag.StringVar(&flagconf, "conf", "../../configs", "config path, eg: -conf config.yaml")
@@ -37,7 +38,7 @@ func init() {
 
 func newApp(logger log.Logger, gs *grpc.Server, rr registry.Registrar) *kratos.App {
 	return kratos.New(
-		kratos.ID(id),
+		kratos.ID(Id),
 		kratos.Name(Name),
 		kratos.Version(Version),
 		kratos.Metadata(map[string]string{}),
@@ -51,11 +52,10 @@ func newApp(logger log.Logger, gs *grpc.Server, rr registry.Registrar) *kratos.A
 
 func main() {
 	flag.Parse()
-	fmt.Println("id:", id, " Name:", Name, " Version:", Version)
 	logger := log.With(log.NewStdLogger(os.Stdout),
 		"ts", log.DefaultTimestamp,
 		"caller", log.DefaultCaller,
-		"service.id", id,
+		"service.id", Id,
 		"service.name", Name,
 		"service.version", Version,
 		"trace_id", tracing.TraceID(),

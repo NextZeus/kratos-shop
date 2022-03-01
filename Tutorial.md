@@ -144,3 +144,12 @@ import "github.com/google/wire"
 // ProviderSet is biz providers.
 var ProviderSet = wire.NewSet(NewUserUseCase, NewAddressUseCase, NewCardUseCase)
 ```
+
+
+# shop application
+
+```shell
+
+xiaodong@bogon ~/g/s/g/n/kratos-shop (main)> mkdir -p app/shop/
+
+```
