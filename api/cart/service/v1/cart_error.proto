@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package api.cart.service.v1;
+
+option go_package = "github.com/nextzeus/kratos-shop/api/cart/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.cart.service.v1";
+
+service Cart_error {
+	rpc CreateCart_error (CreateCart_errorRequest) returns (CreateCart_errorReply);
+	rpc UpdateCart_error (UpdateCart_errorRequest) returns (UpdateCart_errorReply);
+	rpc DeleteCart_error (DeleteCart_errorRequest) returns (DeleteCart_errorReply);
+	rpc GetCart_error (GetCart_errorRequest) returns (GetCart_errorReply);
+	rpc ListCart_error (ListCart_errorRequest) returns (ListCart_errorReply);
+}
+
+message CreateCart_errorRequest {}
+message CreateCart_errorReply {}
+
+message UpdateCart_errorRequest {}
+message UpdateCart_errorReply {}
+
+message DeleteCart_errorRequest {}
+message DeleteCart_errorReply {}
+
+message GetCart_errorRequest {}
+message GetCart_errorReply {}
+
+message ListCart_errorRequest {}
+message ListCart_errorReply {}

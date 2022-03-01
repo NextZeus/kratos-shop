@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package api.cart.service.v1;
+
+option go_package = "github.com/nextzeus/kratos-shop/api/cart/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.cart.service.v1";
+// 购物车
+service Cart {
+	rpc GetCart (GetCartRequest) returns (GetCartReply);
+	rpc DeleteCart (DeleteCartRequest) returns (DeleteCartReply);
+
+	rpc AddItem (AddItemRequest) returns (AddItemReply);
+	rpc UpdateItem (UpdateItemRequest) returns (UpdateItemReply);
+	rpc DeleteItem (DeleteItemRequest) returns (DeleteItemReply);
+}
+message Item {
+	int64 itemId = 1;
+	int64 quantity = 2;
+}
+
+message GetCartRequest {
+	int64 uid = 1;
+}
+message GetCartReply {
+	repeated Item items = 1;
+}
+
+message DeleteCartRequest {
+	int64 uid = 1;
+}
+message DeleteCartReply {
+
+}
+
+message AddItemRequest {
+	int64 uid = 1;
+	int64 itemId = 2;
+	int64 quantity = 3;
+}
+message AddItemReply {
+	repeated Item items = 1;
+}
+
+message UpdateItemRequest {
+	int64 uid = 1;
+	int64 itemId = 2;
+	int64 quantity = 3;
+}
+message UpdateItemReply {
+	repeated Item items = 1;
+}
+
+message DeleteItemRequest {
+	int64 uid = 1;
+	int64 itemId = 2;
+}
+message DeleteItemReply {
+	repeated Item items = 1;
+}
